@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1 class="text-center mt-4 mb-4">Article</h1>
+
+    {% for categoryTitle, articles in groupedArticles %}
+        <div class="category-block bg-primary text-white p-3 mb-3">
+            <h2 class="font-size-24">{{ categoryTitle }}</h2>
+            {% for article in articles %}
+                {% if is_granted('ROLE_ADMIN') or article.state == 'publish' %}
+                    <div class="article-block">
+                        <h3 class="font-size-18">
+                            <a href="{{ path('app_article_detail', {'id': article.id}) }}">
+                                {{ article['title'] }}
+                            </a>
+                        </h3>
+                        {# Ajoutez d'autres détails de l'article si nécessaire #}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+{% endblock %}

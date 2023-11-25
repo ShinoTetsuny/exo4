@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <h1 class="text-center mt-4 mb-4">Crée un Commentaire</h1>
+
+{{ form_start(form) }}
+
+        {{ form_label(form.comment) }}
+        {{ form_widget(form.comment) }}
+        {{ form_errors(form.comment) }}
+
+
+        {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+{{ form_end(form) }}
+
+{% endblock %}

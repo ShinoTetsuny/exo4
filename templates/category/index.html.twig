@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1 class="text-center mt-4 mb-4">Home</h1>
+
+    {% for category in categorys %}
+        <div class="category-block bg-primary text-white p-3 mb-3">
+            <h2 class="font-size-24">
+                <a href="{{ path('app_category_details', {'id': category.id}) }}">{{ category.title }}</a>
+            </h2>
+            {# Ajoutez d'autres détails de la catégorie si nécessaire #}
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,58 @@
+<style>
+    nav {
+        background: linear-gradient(to left, #8a2be2, #ff4500);
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+    }
+
+    body {
+        margin-top: 50px;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+        padding-right: 20px; /* Ajout de l'espace à droite pour le contenu à droite */
+    }
+
+    li {
+        margin-right: 20px;
+    }
+
+    a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: bold;
+    }
+</style>
+
+<nav>
+    <ul>
+        <li><a href="{{ path('app_category') }}">Categories</a></li>
+        <li><a href="{{ path('app_article') }}">Articles</a></li>
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <li><a href="{{ path('app_category_create') }}">Créer une catégorie</a></li>
+            <li><a href="{{ path('app_article_create') }}">Créer un article</a></li>
+        {% endif %}
+
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {% if is_granted('ROLE_USER') %}
+                <li><a href="{{ path('app_user') }}">Changer de Role</a></li>
+            {% endif %}
+            <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
+        {% else %}
+            <li><a href="{{ path('app_login') }}">Se connecter</a></li>
+            <li><a href="{{ path('app_register') }}">Crée Compte</a></li>
+        {% endif %}
+    </ul>
+</nav>

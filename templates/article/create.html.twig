@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <h1 class="text-center mt-4 mb-4">Crée un Article</h1>
+
+{{ form_start(form) }}
+
+        {{ form_label(form.title) }}
+        {{ form_widget(form.title) }}
+        {{ form_errors(form.title) }}
+
+        {{ form_label(form.content) }}
+        {{ form_widget(form.content) }}
+        {{ form_errors(form.content) }}
+
+        {{ form_label(form.state) }}
+            {{ form_widget(form.state, {
+                'value': 'Brouillon',
+                'data': form.vars.value is null ? 'draft' : 'publish',
+            }) }}
+        {{ form_errors(form.state) }}
+
+        {{ form_label(form.category) }}
+        {{ form_widget(form.category) }}
+
+        {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+{{ form_end(form) }}
+
+{% endblock %}

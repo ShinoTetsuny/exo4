@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">{{ category.title }}</h1>
+        
+        <div class="row mt-4">
+            <div class="col-md-8 mx-auto">
+
+                <h2 class="mb-3">Articles liés à la catégorie</h2>
+
+                <ul class="list-group custom-list">
+                    {% for article in category.articles %}
+                        <li class="list-group-item">
+                            <a href="{{ path('app_article_detail', {'id': article.id}) }}" style="color: #333">{{ article.title }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <h3 class="mb-3">Modifier la catégorie</h3>
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            {{ form_start(form) }}
+                            <div class="form-group">
+                                {{ form_label(form.title) }}
+                                {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.title) }}
+                            </div>
+
+                            {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+                            {{ form_end(form) }}
+
+                            <a href="{{ path('app_category_delete', {'id': category.id}) }}" class="btn btn-danger mt-3">Supprimer la catégorie</a>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
